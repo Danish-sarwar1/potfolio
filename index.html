@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sakshi Saini - Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg-color: #f5f5f5;
+        --text-color: #333;
+        --accent-color: #ff5722;
+        --nav-bg: #222;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg-color);
+        overflow-x: hidden;
+        color: var(--text-color);
+      }
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(#ffffff, #dbe9f4);
+      }
+      header {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+      }
+      img.profile {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 5px solid white;
+        margin-bottom: 20px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        animation: fadeInDown 1s ease-in-out;
+      }
+      h1 {
+        font-size: 3rem;
+        animation: fadeInUp 1s ease-in-out;
+      }
+      span#typed {
+        color: var(--accent-color);
+        font-weight: bold;
+      }
+      .top-header {
+        background: var(--nav-bg);
+        padding: 10px 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .top-header a {
+        color: white;
+        margin: 0 15px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .top-header a:hover {
+        color: var(--accent-color);
+        transition: 0.3s;
+      }
+      #progressBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 5px;
+        background: var(--accent-color);
+        width: 0%;
+        z-index: 9999;
+      }
+      nav {
+        display: none;
+      }
+      .buttons {
+        margin: 20px;
+      }
+      .btn {
+        background: var(--accent-color);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 5px;
+      }
+      .btn:hover {
+        background: #e64a19;
+      }
+      .social-icons {
+        margin-top: 20px;
+      }
+      .social-icons a {
+        color: var(--text-color);
+        margin: 0 10px;
+        font-size: 24px;
+        transition: transform 0.3s;
+      }
+      .social-icons a:hover {
+        color: var(--accent-color);
+        transform: scale(1.2);
+      }
+      section {
+        padding: 60px 20px;
+        max-width: 1000px;
+        margin: 0 auto 30px auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 30px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      ul li {
+        background: #f0f0f0;
+        margin: 10px auto;
+        padding: 12px;
+        width: 90%;
+        border-radius: 8px;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: var(--nav-bg);
+        color: white;
+      }
+      .toggle-mode {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 50%;
+        font-size: 20px;
+        display: none;
+        cursor: pointer;
+        z-index: 999;
+      }
+      #loader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+      }
+      #loader.hidden {
+        display: none;
+      }
+      #loader i {
+        font-size: 40px;
+        color: var(--accent-color);
+        animation: spin 2s linear infinite;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Hamburger Menu */
+      .menu-toggle {
+        display: none;
+        font-size: 28px;
+        color: rgb(7, 7, 7);
+        cursor: pointer;
+        position: absolute;
+        left: 20px;
+        top: 15px;
+        z-index: 1001;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        transition: max-height 0.3s ease-in-out;
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+        .nav-links {
+          flex-direction: column;
+          overflow: hidden;
+          max-height: 0;
+          background: var(--nav-bg);
+          width: 100%;
+        }
+        .nav-links.show {
+          max-height: 500px; /* enough height to show all links */
+        }
+        .top-header {
+          flex-direction: column;
+          align-items: flex-start;
+          position: sticky;
+        }
+        .nav-links a {
+          padding: 10px;
+          width: 100%;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader"><i class="fas fa-spinner"></i></div>
+    <div id="progressBar"></div>
+    <div class="top-header">
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="#about"><i class="fas fa-user"></i> About</a>
+        <a href="#skills"><i class="fas fa-cogs"></i> Skills</a>
+        <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="#achievements"><i class="fas fa-trophy"></i> Achievements</a>
+        <a href="#education"><i class="fas fa-graduation-cap"></i> Education</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+    </div>
+
+    <div id="particles-js"></div>
+    <button id="scrollTopBtn" class="scroll-top" onclick="scrollToTop()">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <header>
+      <img src="profile.jpg" alt="Sakshi Saini" class="profile" />
+      <h1>Hi There, I'm Sakshi Saini</h1>
+      <p>I am into <span id="typed"></span></p>
+      <div class="buttons">
+        <a href="SakshiResume.pdf" class="btn" download
+          ><i class="fas fa-download"></i> Download Resume</a
+        >
+      </div>
+      <div class="social-icons">
+        <a
+          href="https://www.linkedin.com/in/sakshi-saini-3b50082a3"
+          target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </header>
+
+    <section id="about">
+      <h2><i class="fas fa-user"></i> About Me</h2>
+      <p>
+        Driven and enthusiastic individual with a passion for human resource
+        management, currently pursuing a degree and seeking an HR Intern role to
+        contribute to talent acquisition, employee engagement, and
+        organizational development. Equipped with strong interpersonal and
+        analytical skills to support HR processes and foster a collaborative
+        workplace culture. Committed to continuous learning and adding value to
+        the organization through innovative solutions and a proactive approach
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2><i class="fas fa-cogs"></i> Skills</h2>
+      <h3>HR Skills</h3>
+      <ul>
+        <li>Recruitment, Onboarding, Employee Engagement</li>
+      </ul>
+      <h3>Soft Skills</h3>
+      <ul>
+        <li>Communication, Adaptability, Team Collaboration</li>
+      </ul>
+      <h3>Technical Skills</h3>
+      <ul>
+        <li>MS Office, Power BI, Data Analysis</li>
+      </ul>
+    </section>
+
+    <section id="experience">
+      <h2><i class="fas fa-briefcase"></i> Experience</h2>
+      <ul>
+        <li>Class Representative</li>
+        <li>Workshop Organizer</li>
+        <li>Project Coordinator</li>
+        <li>NSS Secretary</li>
+      </ul>
+    </section>
+
+    <section id="achievements">
+      <h2><i class="fas fa-trophy"></i> Achievements & Certifications</h2>
+      <ul>
+        <li>Winner - Case Divas</li>
+        <li>Winner - Startup Pitching</li>
+        <li>Winner - Youth Parliament</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+      <ul>
+        <li><b>ISBR Business School</b> - PGDM</li>
+        <li><b>Munger University</b> - B.Sc Zoology (Hons)</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2><i class="fas fa-envelope"></i> Contact</h2>
+      <p><b>Phone:</b> <a href="tel:+917488168092">+91 74881 68092</a></p>
+      <p>
+        <b>Email:</b>
+        <a href="mailto:sainisakshi183@gmail.com">sainisakshi183@gmail.com</a>
+      </p>
+      <p>
+        <b>LinkedIn:</b>
+        <a
+          href="https://www.linkedin.com/in/sakshi-saini-3b50082a3"
+          target="_blank"
+          >linkedin.com/in/sakshi-saini-3b50082a3</a
+        >
+      </p>
+    </section>
+
+    <footer>&copy; 2025 Sakshi Saini | All rights reserved</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+      window.addEventListener("load", function () {
+        document.getElementById("loader").classList.add("hidden");
+      });
+
+      particlesJS.load(
+        "particles-js",
+        "https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/particles.json",
+        function () {
+          console.log("particles.js loaded");
+        }
+      );
+
+      var typed = new Typed("#typed", {
+        strings: [
+          "HR Enthusiast",
+          "Future HR Leader",
+          "Recruitment Specialist",
+          "Organizational Developer",
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true,
+      });
+
+      function toggleMode() {
+        if (document.body.style.backgroundColor === "black") {
+          document.body.style.backgroundColor = "";
+          document.body.style.color = "";
+        } else {
+          document.body.style.backgroundColor = "black";
+          document.body.style.color = "white";
+        }
+      }
+
+      window.onscroll = function () {
+        const scrollBtn = document.getElementById("scrollTopBtn");
+        const progress = document.getElementById("progressBar");
+        const winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        const height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progress.style.width = scrolled + "%";
+
+        if (winScroll > 100) {
+          scrollBtn.style.display = "block";
+        } else {
+          scrollBtn.style.display = "none";
+        }
+
+        document.querySelectorAll("section").forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= window.innerHeight - 100) {
+            section.classList.add("visible");
+          }
+        });
+      };
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      // Toggle hamburger menu
+      // Toggle hamburger menu
+      const menuToggle = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+
+      menuToggle.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent closing when clicking the button itself
+        navLinks.classList.toggle("show");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          navLinks.classList.contains("show") &&
+          !navLinks.contains(e.target)
+        ) {
+          navLinks.classList.remove("show");
+        }
+      });
+    </script>
+  </body>
+</html>
